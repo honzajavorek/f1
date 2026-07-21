@@ -82,8 +82,8 @@ def main(
                     if submission.link_flair_text == ":post-news: News":
                         click.echo(f"Recording as {submission.url}")
                         url_mapping[entry_link] = submission.url
-            else:
-                click.echo("Not news")
+                    else:
+                        click.echo("Not news")
         else:
             click.echo("No link")
 
@@ -92,6 +92,10 @@ def main(
     namespaces = {"atom": "http://www.w3.org/2005/Atom"}
     for entry in xml.xpath("//atom:entry", namespaces=namespaces):
         link = entry.find("./atom:link", namespaces=namespaces)
+        if link is None:
+            click.echo("Removing entry (no link element found)")
+            entry.getparent().remove(entry)
+            continue
         try:
             link.set("href", url_mapping[link.get("href")])
             click.echo(f"Keeping {link.get('href')}")
