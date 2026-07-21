@@ -26,29 +26,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Install Poetry
-        run: pipx install poetry
-
-      - name: Set up Python
-        uses: actions/setup-python@v7
+      - uses: astral-sh/setup-uv@v7
         with:
           python-version: 3.12
-          cache: poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: uv sync
 
     #   - name: Tests
-    #     run: poetry run pytest
+    #     run: uv run pytest
 
     #   - name: Code
-    #     run: poetry run ruff check
+    #     run: uv run ruff check
 
       - name: Run F1news
         env:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-        run: poetry run f1news -o site/f1news.xml
+        run: uv run f1news -o site/f1news.xml
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
