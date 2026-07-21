@@ -1,23 +1,23 @@
-[tool.poetry]
+[project]
 name = "f1news"
 version = "0.1.0"
 description = "Honza Javorek's personal F1 news feed"
-authors = ["Honza Javorek <mail@honzajavorek.cz>"]
-license = "AGPL-3.0-only"
 readme = "README.md"
+authors = [{name = "Honza Javorek", email = "mail@honzajavorek.cz"}]
+license = {text = "AGPL-3.0-only"}
+requires-python = ">=3.12"
+dependencies = [
+    "click>=8.3.2,<9.0.0",
+    "feedparser>=6.0.12,<7.0.0",
+    "httpx>=0.28.1,<0.29.0",
+    "lxml>=6.0.4,<7.0.0",
+    "praw>=7.8.1,<9.0.0",
+    "stamina>=25.2,<27.0",
+]
 
-[tool.poetry.scripts]
+[project.scripts]
 f1news = "f1news.__main__:main"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-click = "^8.3.2"
-feedparser = "^6.0.12"
-httpx = "^0.28.1"
-lxml = "^6.0.4"
-praw = ">=7.8.1,<9.0.0"
-stamina = ">=25.2,<27.0"
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
