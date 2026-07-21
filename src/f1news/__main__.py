@@ -88,7 +88,7 @@ def main(
             click.echo("No link")
 
     click.echo("Rewriting feed")
-    xml = etree.fromstring(xml_bytes)
+    xml = etree.fromstring(xml_bytes, etree.XMLParser(recover=True))
     namespaces = {"atom": "http://www.w3.org/2005/Atom"}
     for entry in xml.xpath("//atom:entry", namespaces=namespaces):
         link = entry.find("./atom:link", namespaces=namespaces)
