@@ -19,5 +19,5 @@ dependencies = [
 f1news = "f1news.__main__:main"
 
 [build-system]
-requires = ["uv_build>=0.8.11,<0.12.0"]
+requires = ["uv_build>=0.8.11,<0.13.0"]
 build-backend = "uv_build"
